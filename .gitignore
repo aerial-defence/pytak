@@ -31,3 +31,5 @@ pylint.log
 redis-server.log
 redis-server/
 __pycache__
+.ipynb_checkpoints/
+config.ini

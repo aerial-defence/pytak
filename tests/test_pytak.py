@@ -1,5 +1,24 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+# Copyright 2022 Greg Albrecht <oss@undef.net>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Author:: Greg Albrecht W2GMD <oss@undef.net>
+# Copyright:: Copyright 2022 Greg Albrecht
+# License:: Apache License, Version 2.0
+#
 
 """Python Team Awareness Kit (PyTAK) Module Tests."""
 
@@ -9,9 +28,9 @@ import urllib
 import pytest
 import pytak
 
-__author__ = 'Greg Albrecht W2GMD <oss@undef.net>'
-__copyright__ = 'Copyright 2022 Greg Albrecht'
-__license__ = 'Apache License, Version 2.0'
+__author__ = "Greg Albrecht W2GMD <oss@undef.net>"
+__copyright__ = "Copyright 2022 Greg Albrecht"
+__license__ = "Apache License, Version 2.0"
 
 
 @pytest.fixture
@@ -26,6 +45,7 @@ def my_Worker(my_queue):
 
 class MyWriter:
     """Mock CoT Event Writer."""
+
     def __init__(self):
         self.events = []
 
@@ -42,7 +62,7 @@ def my_writer():
 async def test_EventWorker(my_queue, my_writer):
     """Tests that EventWorker processes CoT Events from a CoT Event Queue."""
     test_data = b"test test"
-    test_eventworker = pytak.EventWorker(my_queue, my_writer)
+    test_eventworker = pytak.TXWorker(my_queue, {}, my_writer)
     await my_queue.put(test_data)
     await test_eventworker.run(number_of_iterations=1)
 
